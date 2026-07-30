@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of /.well-known/* on Marin Software hosts
+hosts:
+- host: https://www.marinsoftware.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://one.marinsoftware.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 301
+    note: redirects to https://www.marinsoftware.com/
+notes: >-
+  Marin Software publishes no public API developer surface. No /.well-known/
+  discovery documents (security.txt, openid-configuration, oauth-authorization-server,
+  api-catalog, ai-plugin.json) returned 200 on the marketing (www) or application
+  (one.) hosts. Absence recorded as valid negative data.
