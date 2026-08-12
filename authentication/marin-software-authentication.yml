@@ -1,0 +1,67 @@
+generated: '2026-08-12'
+method: searched
+source: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+docs: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+note: >-
+  Marin Software publishes no OpenAPI, so this profile is read from the provider's own
+  live help-center API article rather than derived from a machine-readable spec. The
+  dedicated developer portal that the docs point at
+  (http://developers.marinsoftware.com/api/docs/) no longer resolves to a docs site —
+  every *.marinsoftware.com subdomain is a wildcard catch-all that 301/200s to the
+  marketing homepage — so the help center is the only remaining public auth reference.
+summary:
+  types:
+  - http
+  api_key_in: []
+  oauth2_flows: []
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: >-
+    All Marin API endpoints require HTTP Basic authorization using a Marin username and
+    password — the same credentials used to sign in to the MarinOne application, granting
+    access to the same client accounts. Credentials are issued by a Marin representative;
+    there is no self-service key issuance, no OAuth, and no API-key surface documented.
+  credential_issuance: contact your Marin representative
+  sources:
+  - https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+tenancy:
+  note: >-
+    Marin does not scope requests through the token. Account scoping is carried in required
+    query-string parameters on every call, with the values read out of the MarinOne UI.
+  parameters:
+  - name: clientId
+    in: query
+    required: true
+    description: Marin client ID — Client ID column in M1 > Accounts > Publishers grid.
+  - name: customerId
+    in: query
+    required: true
+    description: Marin customer ID — Customer ID column in M1 > Accounts > Publishers grid.
+  - name: userId
+    in: query
+    required: true
+    description: Marin user ID — the docs instruct the caller to read it from the browser
+      developer-tools HTTP request headers.
+  - name: userCustomerId
+    in: query
+    required: true
+    description: Marin user customer ID — Customer ID column in M1 > Accounts > Publishers grid.
+transport:
+  https_only: true
+  note: Only HTTPS requests are supported; plain HTTP will fail.
+gaps:
+- No OAuth 2.0 or OpenID Connect surface is documented.
+- No scopes or permissions model is published, so scopes/ is intentionally absent.
+- No API keys, no token rotation policy, and no MFA guidance for API credentials.
+- Credentials are the interactive user's own username and password, so an API credential
+  cannot be revoked independently of the human account.
+x-evidence:
+- url: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+  status: 200
+  fetched: '2026-08-12'
+- url: https://developers.marinsoftware.com/api/docs/
+  status: 200
+  note: redirects to https://www.marinsoftware.com/ — the developer docs portal is gone
+  fetched: '2026-08-12'

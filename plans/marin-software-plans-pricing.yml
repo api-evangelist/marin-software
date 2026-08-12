@@ -1,0 +1,93 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.marinsoftware.com/pricing
+currency: USD
+billing_period: monthly
+plan_count: 3
+note: >-
+  Marin publishes a real comparison table with entry prices for all three product tiers —
+  unusual for enterprise martech, where a "contact us" gate is the norm. Prices are
+  "starting at" floors; the table itself carries no overage schedule and no API-specific
+  metering. API access is not priced or gated as a separate line item anywhere on the
+  pricing page; the Marin API and Social API are platform capabilities of the subscription.
+plans:
+- name: Connect
+  price: 500
+  price_display: Starting at $500/mo
+  currency: USD
+  billing_period: monthly
+  contract_term: month-to-month
+  positioning: Collect, understand, and share marketing data
+  included:
+    data_sources: 5
+    additional_sources: available
+    backfill_days: 90
+    data_retention_months: 24
+    data_refresh: daily
+    object_limits: unlimited
+    users: unlimited
+  notes:
+  - Bidding, automated budget pacing, dynamic allocation, AI-powered forecasting and
+    insights are view-only ("Preview") in the dashboard on this tier.
+- name: Ascend
+  price: 1000
+  price_display: Starting at $1000/mo
+  currency: USD
+  billing_period: monthly
+  contract_term: 12 months
+  positioning: Maximize results across ad platforms
+  included:
+    data_sources: unlimited
+    backfill_days: 365
+    data_retention_months: 36
+    data_refresh: intraday
+    object_limits: unlimited
+    users: unlimited
+- name: One
+  price: 2000
+  price_display: Starting at $2000/mo
+  currency: USD
+  billing_period: monthly
+  contract_term: 12 months
+  positioning: Automate and manage ad platforms at scale
+  included:
+    data_sources: unlimited
+    backfill_days: 365
+    data_retention_months: 48
+    data_refresh: intraday
+    object_limits: unlimited
+    users: unlimited
+one_time_fees:
+  note: >-
+    The pricing table marks several line items with "$ = One-time Setup Fee" rather than a
+    published amount — non-API publishers, CRM integrations, and UTM tagging.
+  items:
+  - Non-API Publishers
+  - CRM Integrations
+  - UTM Tagging
+professional_services:
+  consultation_hourly_rate: 250
+  currency: USD
+  source: https://www.marinsoftware.com/legal/terms-of-use
+  note: >-
+    Terms of Use, section VII (Support and Service Levels): additional consultation hours
+    beyond the included onboarding are invoiced at $250/hour on both Marin Connect and
+    Marin Ascend.
+trial:
+  offered: true
+  length_days: 30
+  url: https://www.marinsoftware.com/marinone-free-trial
+  note: >-
+    "Try Marin Free for 30 days." A time-boxed trial of the full product, not a developer
+    sandbox — no test-mode credentials, test identifiers or fixtures are published, so no
+    sandbox/ artifact is emitted.
+overage:
+  documented: false
+  note: No overage rates or metered usage schedule is published.
+x-evidence:
+- url: https://www.marinsoftware.com/pricing
+  status: 200
+  fetched: '2026-08-12'
+- url: https://www.marinsoftware.com/legal/terms-of-use
+  status: 200
+  fetched: '2026-08-12'

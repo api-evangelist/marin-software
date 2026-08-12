@@ -1,0 +1,41 @@
+generated: '2026-08-12'
+method: searched
+source: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+format: http-status-only
+note: >-
+  Marin publishes no error catalog, no machine-readable error body, and no RFC 9457
+  problem+json. The entire published error contract is a two-row table in the "Errors and
+  Limits" section of the Marin API help-center article: "The MarinOne API uses normal HTTP
+  response codes to indicate success or failure." Recorded verbatim rather than expanded —
+  inventing a 4xx taxonomy Marin does not publish would misrepresent the contract.
+envelope: null
+problem_details: false
+codes:
+- status: 200
+  title: OK
+  meaning: Request succeeded.
+  source: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+- status: 500
+  title: Internal Server Error
+  meaning: Request failed.
+  source: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+gaps:
+- No 4xx statuses are documented, so a caller cannot distinguish a bad credential, a bad
+  clientId, a malformed row, or a validation failure from a server fault.
+- No error code registry, no per-field validation messages, no remediation guidance.
+- No error body schema is published, so an agent cannot parse a failure programmatically.
+related_surfaces:
+  note: >-
+    Marin's help center does document publisher-side integration errors that surface in the
+    application (not in the API response body) — for example "Error Communicating With
+    Yahoo! API", "Error Communicating With Microsoft Advertising", and "You can't use the
+    API until you complete the signup process and are approved." These are MarinOne UI
+    sync errors against third-party ad platforms, not Marin API response codes, and are
+    listed here for context only.
+  examples:
+  - https://support.marinsoftware.com/en_US/syncing/error-communicating-with-yahoo-api-error-message
+  - https://support.marinsoftware.com/en_US/microsoft-advertising/error-communicating-with-microsoft-advertising-microsoft-ads-only
+x-evidence:
+- url: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+  status: 200
+  fetched: '2026-08-12'

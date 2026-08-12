@@ -1,0 +1,42 @@
+generated: '2026-08-12'
+method: searched
+source: registry probes + provider docs + GitHub org lookup
+package_count: 0
+packages: []
+note: >-
+  Marin Software ships no first-party client libraries. The Marin API help-center article
+  documents raw HTTP POST with JSON and Basic auth and offers no SDK, sample client, or
+  code snippet in any language. No package exists on any registry under a Marin name, and
+  the company's GitHub organization is an empty shell with zero public repositories.
+registries_probed:
+- {registry: npm, name: marin-software, url: 'https://registry.npmjs.org/marin-software', status: 404}
+- {registry: npm, name: marinsoftware, url: 'https://registry.npmjs.org/marinsoftware', status: 404}
+- {registry: pypi, name: marin-software, url: 'https://pypi.org/pypi/marin-software/json', status: 404}
+- {registry: pypi, name: marinsoftware, url: 'https://pypi.org/pypi/marinsoftware/json', status: 404}
+- {registry: rubygems, name: marin, url: 'https://rubygems.org/api/v1/gems/marin.json', status: 404}
+source_control:
+  github_org: https://github.com/Marin-Software
+  status: 200
+  public_repos: 0
+  org_created: '2020-09-21'
+  note: >-
+    The Marin-Software GitHub organization exists (id 71646461, created 2020-09-21) but
+    publishes zero public repositories and carries no name, description, or website link
+    tying it to Marin Software Incorporated. Because ownership cannot be verified from the
+    org's own metadata and it holds nothing, no GitHubOrganization pointer is emitted.
+third_party:
+  note: >-
+    A GitHub code search surfaces community integrations referencing Marin
+    (e.g. a WooCommerce/Marin integration plugin). These are third-party and are not
+    catalogued as Marin packages.
+x-evidence:
+- url: https://registry.npmjs.org/marin-software
+  status: 404
+  fetched: '2026-08-12'
+- url: https://pypi.org/pypi/marin-software/json
+  status: 404
+  fetched: '2026-08-12'
+- url: https://api.github.com/orgs/Marin-Software
+  status: 200
+  note: public_repos = 0
+  fetched: '2026-08-12'

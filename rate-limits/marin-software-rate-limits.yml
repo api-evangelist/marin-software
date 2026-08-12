@@ -1,0 +1,38 @@
+generated: '2026-08-12'
+method: searched
+source: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+limit_count: 0
+note: >-
+  Marin publishes no rate limits. The Marin API article has a section literally titled
+  "Errors and Limits", and it contains only a two-row HTTP status table (200, 500) — no
+  request ceiling, no window, no burst, no per-key or per-account quota, no 429, and no
+  Retry-After or X-RateLimit-*/RateLimit-* response headers. Because the API host
+  (api.marinsoftware.com) refuses connections from a public network, no live unauthenticated
+  response could be observed to recover headers empirically either. An honest zero:
+  Marin documents a section for limits and leaves it empty.
+limits: []
+headers: []
+exhaustion_status: null
+observed: false
+observation_note: >-
+  Attempted a live probe of https://api.marinsoftware.com/open-api/0.1/bulk/campaigns on
+  2026-08-12; TCP connect timed out on both 443 and 80 (curl exit 28) despite a valid DNS
+  A record (69.194.129.87), so no response headers exist to read.
+related_quotas:
+  note: >-
+    The pricing table does publish subscription-level data quotas that bound what the API
+    can move — data sources (5 on Connect, unlimited on Ascend/One), backfill window
+    (90/365 days), data retention (24/36/48 months), and refresh cadence (daily vs
+    intraday) — plus "no limit to the number of columns, custom columns, or filters" and
+    "no limit to the number of rows or the amount of historical data" on ad-hoc reports.
+    These are commercial entitlements, not API rate limits, and are captured in
+    plans/marin-software-plans-pricing.yml.
+  source: https://www.marinsoftware.com/pricing
+x-evidence:
+- url: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+  status: 200
+  fetched: '2026-08-12'
+- url: https://api.marinsoftware.com/open-api/0.1/bulk/campaigns
+  status: null
+  note: TCP connect timeout, 443 and 80 filtered
+  fetched: '2026-08-12'

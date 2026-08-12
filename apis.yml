@@ -19,9 +19,13 @@ description: >-
   retail media, and app advertising channels. Its product line includes MarinOne
   (campaign management and automation), Marin Connect (marketing data collection
   and unification), Marin Ascend (cross-channel optimization), Marin for Agencies,
-  and managed services. Surfaced as a portfolio company of Sapphire Ventures and
-  added to the API Evangelist network; Marin publishes a marketing site, help
-  center, and application login but no public API developer portal or specification.
+  and managed services. Marin publishes a POST-only REST write API — the Marin API,
+  at https://api.marinsoftware.com/open-api version 0.1 — that pushes campaigns,
+  groups, keywords, ads and strategies into the platform using HTTP Basic auth,
+  documented only in the help center, plus a Marin Social API whose reference link
+  no longer resolves. There is no OpenAPI, no SDK, no changelog and no status page,
+  and the developer documentation portal has been decommissioned. Marin Software has
+  been acquired by Zax Capital, which the company announces on its own homepage.
 url: https://raw.githubusercontent.com/api-evangelist/marin-software/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -31,7 +35,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-12'
 tags:
 - Company
 - Martech
@@ -42,7 +46,53 @@ tags:
 - Paid Search
 - Paid Social
 - Retail Media
-apis: []
+- Campaign Management
+- Bid Management
+- Bulk Upload
+apis:
+- name: Marin API
+  description: >-
+    A POST-only REST API for programmatically writing data into Marin. Five bulk
+    endpoints — /campaigns, /groups, /keywords, /ads and /strategies — accept a JSON
+    body containing a single "data" array of rows whose keys are the same column
+    headers used by Marin's bulk-upload spreadsheets. Requests are HTTPS only,
+    authenticated with HTTP Basic using a MarinOne username and password issued by a
+    Marin representative, and scoped by four required query-string parameters
+    (clientId, customerId, userId, userCustomerId) read out of the MarinOne UI. The
+    API is versioned in the URI path; only version 0.1 is published. Marin publishes
+    no OpenAPI, no SDK and no error catalog beyond HTTP 200 and 500.
+  humanURL: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+  baseURL: https://api.marinsoftware.com/open-api
+  tags:
+  - campaign-management
+  - paid-search
+  - paid-social
+  - retail-media
+  - bid-management
+  - bulk-upload
+  - advertising
+  - martech
+  properties:
+  - type: Documentation
+    url: https://support.marinsoftware.com/en_US/Managing_Campaigns/api
+  - type: APIReference
+    url: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+  - type: Authentication
+    url: authentication/marin-software-authentication.yml
+  - type: Conventions
+    url: conventions/marin-software-conventions.yml
+  - type: DataModel
+    url: data-model/marin-software-data-model.yml
+  - type: ErrorCatalog
+    url: errors/marin-software-error-codes.yml
+  - type: RateLimits
+    url: rate-limits/marin-software-rate-limits.yml
+  - type: Lifecycle
+    url: lifecycle/marin-software-lifecycle.yml
+  x-status: >-
+    Documented on a live provider page, but the published base host
+    api.marinsoftware.com resolves in DNS (69.194.129.87) and refuses TCP connections
+    on both 443 and 80 from a public network as of 2026-08-12. Recorded as observed.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -67,8 +117,36 @@ common:
   url: https://www.marinsoftware.com/legal/privacy-policy
 - type: DomainSecurity
   url: security/marin-software-domain-security.yml
+- type: Documentation
+  url: https://support.marinsoftware.com/en_US/Managing_Campaigns/api
+- type: APIReference
+  url: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+- type: Support
+  url: https://support.marinsoftware.com/
+- type: Authentication
+  url: authentication/marin-software-authentication.yml
+- type: Conventions
+  url: conventions/marin-software-conventions.yml
+- type: DataModel
+  url: data-model/marin-software-data-model.yml
+- type: ErrorCatalog
+  url: errors/marin-software-error-codes.yml
+- type: RateLimits
+  url: rate-limits/marin-software-rate-limits.yml
+- type: Lifecycle
+  url: lifecycle/marin-software-lifecycle.yml
+- type: Plans
+  url: plans/marin-software-plans-pricing.yml
+- type: Packages
+  url: packages/marin-software-packages.yml
+- type: Conformance
+  url: conformance/marin-software-conformance.yml
+- type: Compliance
+  url: https://www.marinsoftware.com/legal/data-processing-addendum
+- type: LLMsTxt
+  url: llms/marin-software-llms.txt
 x-enrichment:
-  date: '2026-07-20'
+  date: '2026-08-12'
   status: enriched
-  artifacts_added: 2
+  artifacts_added: 10
   pass: local-v1

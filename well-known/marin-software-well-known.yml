@@ -1,18 +1,63 @@
-generated: '2026-07-20'
-method: searched
-source: live probes of /.well-known/* on Marin Software hosts
+generated: '2026-08-12'
+method: probed
+source: live probes of /.well-known/* on every Marin Software host
+result: no-hits
+note: >-
+  A recorded absence, not a presence. Every /.well-known/ path probed on every Marin host
+  returned 404 or 301 — no security.txt, no OIDC or OAuth discovery, no api-catalog, no
+  ai-plugin, no agent card. The www origin answers every /.well-known/* request with an
+  88-byte HTML page reading "Invalid .well-known request", and one.marinsoftware.com 301s
+  every path to the marketing site. No WellKnown, SecurityTxt, APICatalog or AgentCard
+  pointer is emitted for this provider, and no raw documents were saved because none exist.
+  api.marinsoftware.com — the base host published in Marin's own API reference — could not
+  be probed at all: DNS resolves (69.194.129.87) but TCP 443 and 80 both time out.
 hosts:
 - host: https://www.marinsoftware.com
   documents:
-  - path: /.well-known/security.txt
-    status: 404
+  - {path: /.well-known/security.txt, status: 404, note: 'body: "Invalid .well-known request"'}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404, note: Webflow 404 HTML shell}
+  - {path: /openapi.json, status: 404}
+  - {path: /robots.txt, status: 200, note: 'served, but a robots file only — 4 Disallow rules and a sitemap line'}
+- host: https://support.marinsoftware.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+  - {path: /openapi.json, status: 404, note: 'content-type application/json but the body is a Helpjuice 404 HTML page — a soft-404, not a document'}
+  - {path: /swagger.json, status: 404, note: same soft-404 shape}
+  - {path: /robots.txt, status: 200, note: zero-byte body}
 - host: https://one.marinsoftware.com
   documents:
-  - path: /.well-known/security.txt
-    status: 301
-    note: redirects to https://www.marinsoftware.com/
-notes: >-
-  Marin Software publishes no public API developer surface. No /.well-known/
-  discovery documents (security.txt, openid-configuration, oauth-authorization-server,
-  api-catalog, ai-plugin.json) returned 200 on the marketing (www) or application
-  (one.) hosts. Absence recorded as valid negative data.
+  - {path: /.well-known/security.txt, status: 301, note: 301s to https://www.marinsoftware.com/}
+  - {path: /.well-known/openid-configuration, status: 301}
+  - {path: /.well-known/oauth-authorization-server, status: 301}
+  - {path: /.well-known/api-catalog, status: 301}
+  - {path: /.well-known/ai-plugin.json, status: 301}
+  - {path: /.well-known/agent-card.json, status: 301}
+  - {path: /.well-known/agent.json, status: 301}
+  - {path: /llms.txt, status: 301}
+  - {path: /openapi.json, status: 301}
+- host: https://api.marinsoftware.com
+  unreachable: true
+  documents: []
+  note: >-
+    Not probed — DNS A record 69.194.129.87 resolves but TCP connect times out on both 443
+    and 80, so no /.well-known/ request could be issued.
+wildcard_warning: >-
+  marinsoftware.com serves a wildcard subdomain catch-all. status., trust., security.,
+  developers., api-docs. and an arbitrary nonsense subdomain all resolve to the same
+  CloudFront distribution (d33u0pg45w7bx8.cloudfront.net) and return HTTP 200 for the
+  marketing homepage. Any probe of a Marin subdomain that trusts a bare 200 will record a
+  false positive; every 200 in this pipeline run was checked against its final URL.
+checked: '2026-08-12'

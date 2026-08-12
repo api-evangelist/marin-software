@@ -1,0 +1,152 @@
+generated: '2026-08-12'
+method: searched
+source: https://support.marinsoftware.com/en_US/bulk-actions/bulk-upload-requirements
+note: >-
+  Derived from Marin's own published field reference rather than from an OpenAPI — Marin
+  ships no machine-readable spec. The Marin API request body is a "data" array of rows whose
+  keys are exactly the bulk-sheet column headers documented on the Bulk Upload Requirements
+  page ("The following tables outline the requirements for some of the most popular types of
+  fields used in bulk uploads and API requests"), so that page IS the API's schema. Headers
+  in square brackets are optional; headers without brackets are required. Objects are
+  addressed by natural-key NAME, not by surrogate ID — there is no id-prefix scheme.
+identity_model:
+  style: natural-key
+  detail: >-
+    Rows are keyed by human names carried on the row itself — Account, then Campaign, then
+    Group, then Keyword — rather than by opaque identifiers. The only surrogate identifier
+    exposed in the field reference is [Creative ID], used to edit an existing creative and
+    returned on Creative reports. Tenancy identifiers (clientId, customerId, userId,
+    userCustomerId) travel in the query string, not in the body.
+entities:
+- name: Account
+  endpoint: null
+  description: >-
+    A linked publisher ad account, shown on the MarinOne Channel tab / Publishers grid.
+    Not writable through the API; every other object references it by name.
+  fields:
+  - {name: Account, required: true, note: Publisher account name as shown on the Channel tab}
+- name: Campaign
+  endpoint: /campaigns
+  description: A publisher campaign managed through Marin.
+  fields:
+  - {name: Account, required: true}
+  - {name: Campaign, required: true, note: Campaign name}
+  - {name: Status, required: false, values: [Active, Paused, Deleted], default: Active}
+  - {name: Strategy, required: false, note: Marin strategy name to associate with the campaign}
+  - {name: Mobile Bid Adjustment, required: false, default: 0, note: '-100, or 90 to 900 inclusive (Google/Yahoo! Japan); -100 to 900 (Microsoft)'}
+  - {name: Mobile Bid Adj. Exclusion, required: false, default: 'On', note: Microsoft only}
+  - {name: Tablet Bid Adjustment, required: false, default: 0}
+  - {name: Desktop Bid Adjustment, required: false, default: 0, note: Not supported for Microsoft}
+  - {name: Tracking Template, required: false}
+  - {name: Custom Parameters, required: false, note: Up to 3 per object; names <=16 alphanumeric chars, values <=200 chars; comma delimited}
+  - {name: Start Date, required: false, default: Today, note: Must use the Marin client account locale}
+  - {name: Campaign End Date, required: false}
+  - {name: Daily Budget, required: false, note: 'Yahoo! Japan minimum is 100 yen'}
+  - {name: Network, required: false, default: Search & Search Partners, values: [Search, Search Partners, Content]}
+  - {name: Final URL Suffix, required: false, note: Not supported for Microsoft}
+  - {name: Campaign Type, required: false, default: Sponsored Products, values: [Sponsored Products, Sponsored Brands, Sponsored Display, Sponsored TV], note: Amazon only}
+  - {name: Target ROAS, required: false, note: 'Percent format — 1.06 entered as "106"; Google and Microsoft only'}
+- name: Group
+  endpoint: /groups
+  description: An ad group inside a campaign.
+  fields:
+  - {name: Account, required: true}
+  - {name: Campaign, required: true}
+  - {name: Group, required: true}
+  note: >-
+    Marin's field reference does not publish a dedicated Group table; group fields appear
+    as the Account/Campaign/Group key columns on the keyword and creative tables. Not
+    expanded here rather than invented.
+- name: Keyword
+  endpoint: /keywords
+  description: A bid-managed keyword inside a group.
+  fields:
+  - {name: Account, required: true}
+  - {name: Campaign, required: true}
+  - {name: Group, required: true}
+  - {name: Keyword, required: true}
+  - {name: Match Type, required: false, values: [Broad, Exact, Phrase], default: Broad, note: Recommended for most keyword-level uploads}
+  - {name: Status, required: false, values: [Active, Paused, Deleted]}
+  - {name: Search Bid, required: false, note: Max CPC value}
+  - {name: Landing Page, required: false, note: Google/Microsoft Final URL}
+  - {name: Mobile Landing Page, required: false, note: Google only}
+  - {name: Destination URL, required: false}
+  - {name: Tracking Template, required: false, note: Google/Microsoft}
+  - {name: Custom Parameters, required: false, note: Google/Microsoft ValueTrack parameters}
+  - {name: Bid Override, required: false, values: ['On', 'Off']}
+  - {name: Override Until, required: false, format: YYYY/MM/DD}
+  - {name: Bid Override Target Position Range, required: false, note: 1.0-10.0}
+  - {name: Click Through URL, required: false, note: If URL is a redirect}
+- name: Creative
+  endpoint: /ads
+  description: >-
+    An ad creative. The field surface is publisher-conditional across Google, Microsoft and
+    Yahoo! Japan and covers ETA, ETA++ and RSA ad formats.
+  fields:
+  - {name: Account, required: true}
+  - {name: Campaign, required: true}
+  - {name: Group, required: true}
+  - {name: Creative ID, required: false, note: Surrogate id — used to edit an existing creative; included in Creative reports}
+  - {name: Headline, required: false}
+  - {name: Headline 2, required: false, note: Required for ETAs and RSAs}
+  - {name: Headline 3, required: false, note: Required for RSAs, optional for ETAs}
+  - {name: Headline 4 through Headline 15, required: false, note: RSAs only, Google only}
+  - {name: Headline Pinned to Position 1 through 3, required: false, note: RSAs only}
+  - {name: Description Line 1, required: false}
+  - {name: Description Line 2, required: false, note: Required for RSAs}
+  - {name: Description Line 3, required: false, note: RSAs only}
+  - {name: Description Line 4, required: false, note: RSAs only}
+  - {name: Description Pinned to Position 1 and 2, required: false, note: RSAs only}
+  - {name: Creative Type, required: false}
+  - {name: Status, required: false, values: [Active, Paused, Deleted]}
+  - {name: Display URL, required: false}
+  - {name: Display URL Nav 1, required: false, note: Equivalent to Google/Microsoft Path 1, Yahoo! Japan Directory 1}
+  - {name: Display URL Nav 2, required: false, note: Equivalent to Google/Microsoft Path 2, Yahoo! Japan Directory 2}
+  - {name: Landing Page, required: false, note: Google only}
+  - {name: Mobile Landing Page, required: false, note: Google only}
+  - {name: Destination URL, required: false, note: Microsoft only}
+  - {name: Click Through URL, required: false, note: If URL is a redirect}
+  - {name: Tracking Template, required: false}
+  - {name: Custom Parameters, required: false, note: Google only}
+  - {name: Image, required: false, note: File name of the image ad file}
+  - {name: Creative Name, required: false}
+  - {name: Policy Name, required: false, note: Editorial policy that caused a rejection}
+  - {name: Violating Text, required: false, note: Words that broke the publisher editorial policy}
+  - {name: Device Preference, required: false, note: 'Mobile preferred; Yahoo! Japan requires Creative Type "Text2 (15-19-19)"'}
+  - {name: Ad Name (Yahoo Japan), required: false}
+  - {name: Carriers, required: false, values: [Docomo, KDDI, Softbank], note: Yahoo! Japan only}
+- name: Strategy
+  endpoint: /strategies
+  description: A Marin bid strategy that campaigns are assigned to.
+  fields:
+  - {name: Strategy, required: true}
+  - {name: Bid Calculations, required: false, values: [Preview, Traffic], note: Controls whether calculated bids are posted to the publisher}
+  - {name: Goal, required: false, note: 'e.g. Pace to Spend Target'}
+relationships:
+- {from: Campaign, to: Account, type: belongs_to, via: Account}
+- {from: Campaign, to: Strategy, type: belongs_to, via: Strategy, optional: true}
+- {from: Group, to: Campaign, type: belongs_to, via: Campaign}
+- {from: Keyword, to: Group, type: belongs_to, via: Group}
+- {from: Creative, to: Group, type: belongs_to, via: Group}
+- {from: Account, to: Campaign, type: has_many, via: Account}
+- {from: Campaign, to: Group, type: has_many, via: Campaign}
+- {from: Group, to: Keyword, type: has_many, via: Group}
+- {from: Group, to: Creative, type: has_many, via: Group}
+- {from: Strategy, to: Campaign, type: has_many, via: Strategy}
+publisher_dimension:
+  note: >-
+    Field availability is conditional on the destination ad platform, which the model
+    inherits from the linked Account rather than from a field. The reference documents
+    per-publisher columns for Google, Microsoft, Yahoo! Japan and Amazon.
+  publishers: [Google, Microsoft, Yahoo! Japan, Amazon]
+gaps:
+- No read model is documented — the API is write-only, so no response schemas exist.
+- No JSON Schema, OpenAPI, or type/format declarations; every value is described in prose.
+- Group has no published field table of its own.
+x-evidence:
+- url: https://support.marinsoftware.com/en_US/bulk-actions/bulk-upload-requirements
+  status: 200
+  fetched: '2026-08-12'
+- url: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+  status: 200
+  fetched: '2026-08-12'

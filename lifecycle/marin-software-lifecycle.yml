@@ -1,0 +1,100 @@
+generated: '2026-08-12'
+method: searched
+source: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+versioning:
+  scheme: uri-path
+  current: '0.1'
+  policy: >-
+    "The Marin API is versioned. This means there can be multiple versions available at any
+    one time. Currently only one version is available." The version segment follows the base
+    URL — POST https://api.marinsoftware.com/open-api/0.1/bulk/campaigns.
+  docs: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+  note: >-
+    Version 0.1 is described as the "Initial version". No successor version has been
+    published, and the article was last edited 2024-05-23.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation policy, no sunset/deprecation header support (RFC 8594), and no
+    end-of-life notice for version 0.1 is published anywhere on Marin's live surface.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    Marin's Terms of Use carry a "Support and Service Levels" section, but it defines
+    onboarding hours, training entitlements and account-management coverage per package
+    (Standard / Mid-market) — not an availability or uptime commitment. No uptime target,
+    no credits regime, no API-specific SLA.
+  source: https://www.marinsoftware.com/legal/terms-of-use
+status_page: null
+status_page_note: >-
+  No status page exists. status.marinsoftware.com returns HTTP 200, but marinsoftware.com
+  serves a wildcard subdomain catch-all: status., trust., security., developers.,
+  api-docs. and an arbitrary control subdomain all resolve to the same CloudFront
+  distribution and land on https://www.marinsoftware.com/. The 200 is the marketing
+  homepage, not a status page, so no StatusPage pointer is emitted.
+changelog: null
+changelog_note: >-
+  No release notes, changelog, or "what's new" surface. The help center has no changelog
+  category and a site search for "release notes" returns only feature articles.
+deprecated_operations: []
+health:
+  api_host: api.marinsoftware.com
+  dns_resolves: true
+  dns_a: 69.194.129.87
+  tcp_443: filtered
+  tcp_80: filtered
+  https_status: null
+  note: >-
+    The published API base host still has a live DNS A record but does not accept
+    connections: both 443 and 80 time out from a public network. The Marin API contract is
+    documented on a live page while the host that serves it is unreachable to the public
+    internet — consistent with a customer-network / allowlisted origin, or with the surface
+    having been retired. Recorded as an observation, not a conclusion.
+  checked: '2026-08-12'
+company_events:
+- date: '2026'
+  event: Acquired by Zax Capital
+  detail: >-
+    marinsoftware.com now titles its homepage "Home - Marin Has Been Acquired by Zax
+    Capital" and carries the banner "ANNOUNCEMENT: Marin Software has been acquired by Zax
+    Capital", describing an "AI-first era" and stating "More updates are on the way —
+    including early access invites." Shareholder questions are directed to Armanino
+    (Administrator) at marinsoftware@armanino.com.
+  source: https://www.marinsoftware.com/
+- date: '2026-08-12'
+  event: Application login host no longer serves the app
+  detail: >-
+    one.marinsoftware.com — the MarinOne application host still linked as "Log In" from
+    the marketing site — 301s every path to https://www.marinsoftware.com/.
+  source: https://one.marinsoftware.com/
+- date: '2026-08-12'
+  event: Developer documentation portal decommissioned
+  detail: >-
+    Both live Marin pages that reference the API (the Reporting capability page and the
+    Marin Social API help article) link to http://developers.marinsoftware.com/api/docs/.
+    That host now redirects to the marketing homepage, so the linked reference — including
+    the entire Marin Social API documentation — is gone.
+  source: https://www.marinsoftware.com/capabilities/reporting
+x-evidence:
+- url: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+  status: 200
+  fetched: '2026-08-12'
+- url: https://status.marinsoftware.com/
+  status: 200
+  note: wildcard catch-all — final URL https://www.marinsoftware.com/ (not a status page)
+  fetched: '2026-08-12'
+- url: https://developers.marinsoftware.com/api/docs/
+  status: 200
+  note: redirects to https://www.marinsoftware.com/
+  fetched: '2026-08-12'
+- url: https://one.marinsoftware.com/openapi.json
+  status: 301
+  note: every path 301s to the marketing site
+  fetched: '2026-08-12'
+- url: https://api.marinsoftware.com/open-api/0.1/bulk/campaigns
+  status: null
+  note: TCP connect timeout on 443 and 80 (curl exit 28); DNS A 69.194.129.87
+  fetched: '2026-08-12'

@@ -1,0 +1,128 @@
+generated: '2026-08-12'
+method: searched
+source: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+docs: https://support.marinsoftware.com/en_US/Managing_Campaigns/api
+summary: >-
+  The Marin API is a deliberately narrow, POST-only REST write surface over the MarinOne
+  bulk-upload engine. There is no read/GET surface, no pagination, no filtering, no
+  field expansion, no request-id tracing, no idempotency contract, and no rate-limit
+  signalling documented. Everything below is what the provider's own live help-center
+  article states; the absences are recorded as absences, not guessed.
+authentication:
+  style: http-basic
+  detail: Marin username and password; see authentication/marin-software-authentication.yml
+base_url: https://api.marinsoftware.com/open-api
+request:
+  methods:
+  - POST
+  note: >-
+    "Post-only REST API for select objects: campaigns, groups, keywords, ads and strategies.
+    All operations are input using JSON in the request body."
+  url_template: >-
+    POST {base-api-url}/{version}/bulk/{endpoint}?clientId={cid}&customerId={customerId}&userId={userId}&userCustomerId={userCustomerId}
+  example: >-
+    https://api.marinsoftware.com/open-api/0.1/bulk/campaigns?clientId=12345&customerId=6789&userId=1234556&userCustomerId=6789
+  content_type: application/json
+  body_shape:
+    envelope: data
+    detail: >-
+      A single top-level "data" array of row objects whose keys are the human-readable
+      bulk-sheet column headers (e.g. "Account", "Campaign", "Daily Budget"). Field names
+      are the same headers used by the bulk-upload spreadsheets, not machine identifiers.
+    example: '{ "data": [ { "Account": "Test", "Campaign": "Search & Content", "Daily Budget": 2 } ] }'
+  field_reference: https://support.marinsoftware.com/en_US/bulk-actions/bulk-upload-requirements
+endpoints:
+- path: /campaigns
+  operation: create or edit campaigns
+- path: /groups
+  operation: create or edit groups
+- path: /keywords
+  operation: create or edit keywords
+- path: /ads
+  operation: create or edit ads
+- path: /strategies
+  operation: create or edit strategies
+versioning:
+  scheme: uri-path
+  current: '0.1'
+  position: immediately after the base URL, before /bulk/
+  policy: >-
+    "The Marin API is versioned. This means there can be multiple versions available at
+    any one time. Currently only one version is available." 0.1 is labelled "Initial version".
+  multiple_versions_supported: true
+  versions:
+  - version: '0.1'
+    comment: Initial version
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key, no request de-duplication window, and no documented replay
+    semantics. Because every operation is an upsert-style bulk POST keyed on natural
+    identifiers (Account / Campaign / Group / Keyword names), a repeated POST re-applies
+    the same edit rather than being rejected — but the provider makes no idempotency
+    guarantee, so no Idempotency pointer is emitted for this provider.
+pagination:
+  supported: false
+  note: Write-only surface; nothing is returned to page through.
+filtering:
+  supported: false
+expansion:
+  supported: false
+metadata:
+  supported: false
+request_tracing:
+  request_id_header: null
+  note: No correlation/request-id header is documented.
+errors:
+  envelope: null
+  format: http-status-only
+  documented_codes:
+  - 200
+  - 500
+  note: >-
+    "The MarinOne API uses normal HTTP response codes to indicate success or failure."
+    Only 200 (OK) and 500 (Internal Server Error) are published. No 4xx taxonomy, no
+    machine-readable error body, no RFC 9457 problem+json.
+  catalog: errors/marin-software-error-codes.yml
+rate_limiting:
+  documented: false
+  headers: []
+  note: See rate-limits/marin-software-rate-limits.yml — no published limits or headers.
+transport:
+  https_only: true
+  note: Only HTTPS requests are supported. Plain HTTP will fail.
+alternative_surfaces:
+- name: Marin Social API
+  status: documented-but-unreachable
+  note: >-
+    Marin documents a second API — the Marin Social API for Meta statistics, advertisers
+    and Media Plan creation — but its only reference link points at
+    http://developers.marinsoftware.com/api/docs/marin-social-api.html, which now
+    resolves to the marketing homepage. No base URL is recoverable from any live Marin
+    page, so no api entry is claimed for it.
+  docs: https://support.marinsoftware.com/en_US/platform-intro-metrics/marin-social-api-documentation
+- name: BI Connect
+  status: product-feature
+  note: Data-warehouse / BI tool integration (Tableau, Looker Studio) exposed in-product,
+    not as a public API contract.
+- name: Web query reporting
+  status: product-feature
+  note: Copy a report URL out of MarinOne and paste it into Excel or Google Sheets; a
+    per-report signed URL, not a documented API.
+- name: FTP bulk upload
+  status: documented
+  note: Bulk files can be uploaded via FTP as an alternative to the API.
+  docs: https://support.marinsoftware.com/en_US/bulk-actions/adding-or-editing-objects-via-ftp
+cross_links:
+  authentication: authentication/marin-software-authentication.yml
+  errors: errors/marin-software-error-codes.yml
+  lifecycle: lifecycle/marin-software-lifecycle.yml
+  rate_limits: rate-limits/marin-software-rate-limits.yml
+  data_model: data-model/marin-software-data-model.yml
+x-evidence:
+- url: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
+  status: 200
+  fetched: '2026-08-12'
+- url: https://support.marinsoftware.com/en_US/Managing_Campaigns/api
+  status: 200
+  fetched: '2026-08-12'
