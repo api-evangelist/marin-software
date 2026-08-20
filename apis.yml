@@ -38,6 +38,19 @@ created: '2026-07-17'
 modified: '2026-08-12'
 tags:
 - Company
+- MarTech
+- Advertising
+- Marketing
+- Performance Marketing
+- Digital Advertising
+- Paid Search
+- Paid Social
+- Retail Media
+- Campaign Management
+- Bid Management
+- Bulk Upload
+tags_raw:
+- Company
 - Martech
 - Advertising
 - Marketing
@@ -64,6 +77,15 @@ apis:
   humanURL: https://support.marinsoftware.com/en_US/bulk-actions/marin-api
   baseURL: https://api.marinsoftware.com/open-api
   tags:
+  - Campaign Management
+  - Paid Search
+  - Paid Social
+  - Retail Media
+  - Bid Management
+  - Bulk Upload
+  - Advertising
+  - MarTech
+  tags_raw:
   - campaign-management
   - paid-search
   - paid-social
