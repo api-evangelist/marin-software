@@ -64,6 +64,105 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Marin Software is a company surfaced as a portfolio company of sapphire-ventures and added to the API Evangelist network as a stub for enrichment. Sector: martech. This profile is a lead awaiting the enrichment pipeline.
+Marin Software is a performance marketing and digital advertising management platform used by e-commerce brands, agencies, and enterprise marketers to plan, automate, and optimize paid media at scale across paid search, paid social, retail media, and app advertising channels. Its product line includes MarinOne (campaign management and automation), Marin Connect (marketing data collection and unification), Marin Ascend (cross-channel optimization), Marin for Agencies, and managed services. Marin publishes a POST-only REST write API — the Marin API, at https://api.marinsoftware.com/open-api version 0.1 — that pushes campaigns, groups, keywords, ads and strategies into the platform using HTTP Basic auth, documented only in the help center, plus a Marin Social API whose reference link no longer resolves. There is no OpenAPI, no SDK, no changelog and no status page, and the developer documentation portal has been decommissioned. Marin Software has been acquired by Zax Capital, which the company announces on its own homepage.
 
-Backed by: sapphire-ventures — https://www.marinsoftware.com/
+**Areas:** Company · MarTech · Advertising · Marketing · Performance Marketing · Digital Advertising · Paid Search · Paid Social · Retail Media · Campaign Management · Bid Management · Bulk Upload
+
+## Marin Software on APIs.io
+
+Everything profiled for Marin Software is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/marin-software/](https://apis.io/providers/marin-software/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Marin API](https://apis.io/apis/marin-software/marin-api/) — A POST-only REST API for programmatically writing data into Marin. Five bulk endpoints — /campaigns, /groups, /keywords, /ads and /strategies — accept a…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Marin Software Authentication](https://apis.io/security/marin-software/marin-software-authentication/)
+- [Marin Software Domain Security](https://apis.io/security/marin-software/marin-software-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Marin Software Plans Pricing](https://apis.io/plans/marin-software/marin-software-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Marin Software Rate Limits](https://apis.io/rate-limits/marin-software/marin-software-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.marinsoftware.com/)
+- [Documentation](https://support.marinsoftware.com/en_US/Managing_Campaigns/api)
+- [API reference](https://support.marinsoftware.com/en_US/bulk-actions/marin-api)
+- [Pricing](https://www.marinsoftware.com/pricing)
+- [Sign up](https://www.marinsoftware.com/marinone-free-trial)
+- [Support](https://support.marinsoftware.com/)
+- [Blog](https://www.marinsoftware.com/blog)
+- [Compliance](https://www.marinsoftware.com/legal/data-processing-addendum)
+- [Terms of service](https://www.marinsoftware.com/legal/terms-of-use)
+- [Privacy policy](https://www.marinsoftware.com/legal/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 33.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 84.2 |
+
+**Agent readiness 7.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/marin-software/](https://apis.io/providers/marin-software/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Marin Software: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/marin-software/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
